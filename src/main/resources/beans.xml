@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--  For reading properties files -->
+    <bean id="jmsProperties"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jms.properties" />
+    </bean>
+    <bean id="jmsConfig" class="vn.com.tma.configs.JMSConfig">
+        <property name="urlBrokerConnection" value="${spring.activemq.broker-url}"/>
+        <property name="username" value="${spring.activemq.user}" />
+        <property name="password" value="${spring.activemq.password}"/>
+        <property name="queueName" value="${jms.queue.destination}"/>
+    </bean>
+</beans>
