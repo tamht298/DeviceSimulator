@@ -17,4 +17,12 @@
         <property name="password" value="${spring.activemq.password}"/>
         <property name="queueName" value="${jms.queue.destination}"/>
     </bean>
+    <bean id="device1" class="vn.com.tma.documents.Device">
+        <property name="name" value="BCB-1"></property>
+        <property name="address" value="192.168.20.6"></property>
+        <property name="macAddress" value="00-15-E9-2B-99-B5"></property>
+        <property name="status" value="Up"></property>
+        <property name="type" value="06582-T20"></property>
+        <property name="version" value="1.2.2"></property>
+    </bean>
 </beans>

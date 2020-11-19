@@ -1,14 +1,20 @@
+package vn.com.tma.sender;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import vn.com.tma.configs.JMSConfig;
+import vn.com.tma.documents.Device;
 
 import javax.jms.*;
 
-public class AppConsumer {
-    public static void main(String[] args) throws JMSException {
+public class Receiver {
+    private ApplicationContext context;
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+    public Receiver(ApplicationContext context) {
+        this.context = context;
+    }
+
+    public void receiveCommandMessage() throws JMSException {
         JMSConfig jmsConfig = (JMSConfig) context.getBean("jmsConfig");
 
         /**
@@ -24,15 +30,15 @@ public class AppConsumer {
 
         Destination destination = session.createQueue("DeviceQueue");
 
+        Device device1 = (Device) context.getBean("device1");
         // MessageConsumer is used for receiving (consuming) messages
-        MessageConsumer consumer = session.createConsumer(destination);
+        MessageConsumer consumer = session.createConsumer(destination, "JMSCorrelationID='"+device1.getMacAddress()+"'");
 
         String body;
 
         do {
             // Here we receive the message.
             Message message = consumer.receive();
-
             body = ((TextMessage) message).getText();
             System.out.println("Received message '" + body + "'");
         } while (!body.equalsIgnoreCase("SHUTDOWN"));
