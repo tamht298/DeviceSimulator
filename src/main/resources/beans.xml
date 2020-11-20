@@ -25,4 +25,7 @@
         <property name="type" value="06582-T20"></property>
         <property name="version" value="1.2.2"></property>
     </bean>
+    <bean id="device2" class="vn.com.tma.documents.Device">
+        <property name="macAddress" value="00-15-E9-2B-99-BB"></property>
+    </bean>
 </beans>

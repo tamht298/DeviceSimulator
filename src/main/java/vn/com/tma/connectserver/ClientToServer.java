@@ -29,7 +29,6 @@ public class ClientToServer {
 //                throw new RuntimeException("Failed : HTTP error code : "
 //                        + conn.getResponseCode());
 //            }
-
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));
 
@@ -38,8 +37,6 @@ public class ClientToServer {
             while ((output = br.readLine()) != null) {
                 System.out.println(output);
             }
-
-
             conn.disconnect();
 
         } catch (
